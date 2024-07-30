@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Artist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ArtistController extends Controller
 {
@@ -30,8 +31,8 @@ class ArtistController extends Controller
             return redirect()->route('login');
         }
 
-        if(Auth::user()->role!='admin') {
-            return abort(401);
+        if (!Gate::allows('create-artist')) {
+            abort(403);
         }
 
         //Traitement
@@ -44,6 +45,10 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('update-artist')) {
+            abort(403);
+        }
+
         //Validation des données du formulaire
         $validated = $request->validate([
             'firstname' => 'required|max:60',
@@ -79,6 +84,10 @@ class ArtistController extends Controller
      */
     public function edit(string $id)
     {
+        if (!Gate::allows('update-artist')) {
+            abort(403);
+        }
+
         $artist = Artist::find($id);
         
         return view('artist.edit',[
@@ -91,21 +100,26 @@ class ArtistController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        	//Validation des données du formulaire
-            $validated = $request->validate([
-                'firstname' => 'required|max:60',
-                'lastname' => 'required|max:60',
-            ]);
+        if (!Gate::allows('update-artist')) {
+            abort(403);
+        }
+
     
-           //Le formulaire a été validé, nous récupérons l’artiste à modifier
-            $artist = Artist::find($id);
-    
-           //Mise à jour des données modifiées et sauvegarde dans la base de données
-            $artist->update($validated);
-    
-            return view('artist.show',[
-                'artist' => $artist,
-            ]);    
+        //Validation des données du formulaire
+        $validated = $request->validate([
+            'firstname' => 'required|max:60',
+            'lastname' => 'required|max:60',
+        ]);
+
+        //Le formulaire a été validé, nous récupérons l’artiste à modifier
+        $artist = Artist::find($id);
+
+        //Mise à jour des données modifiées et sauvegarde dans la base de données
+        $artist->update($validated);
+
+        return view('artist.show',[
+            'artist' => $artist,
+        ]);    
     }
 
     /**
@@ -113,6 +127,10 @@ class ArtistController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Gate::allows('delete-artist')) {
+            abort(403);
+        }
+
         $artist = Artist::find($id);
 
         if($artist) {
