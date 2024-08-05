@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             PriceSeeder::class,
             RoleSeeder::class,
             LocalitySeeder::class,
+            ReservationSeeder::class,
+            LocationSeeder::class,
         ]);
 
         //Créer 1 admin
