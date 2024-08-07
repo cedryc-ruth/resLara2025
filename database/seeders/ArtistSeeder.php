@@ -15,8 +15,10 @@ class ArtistSeeder extends Seeder
     public function run(): void
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Artist::truncate();
-        
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
         //Define data
        $artists = [
             ['firstname'=>'Daniel','lastname'=>'Marcelin'],
@@ -30,6 +32,8 @@ class ArtistSeeder extends Seeder
             ['firstname'=>'Guillaume','lastname'=>'Alexandre'],
             ['firstname'=>'Claude','lastname'=>'Semal'],
             ['firstname'=>'Laurence','lastname'=>'Warin'],
+            ['firstname'=>'Pierre','lastname'=>'Wayburn'],
+            ['firstname'=>'Gwendoline','lastname'=>'Gauthier'],
         ];
         
         //Insert data in the table
