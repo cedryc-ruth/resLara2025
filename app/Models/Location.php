@@ -45,4 +45,12 @@ class Location extends Model
     {
         return $this->belongsTo(Locality::class);
     }
+
+    /**
+     * Get the shows in this location.
+     */
+    public function shows(): HasMany
+    {
+        return $this->hasMany(Show::class);
+    }
 }

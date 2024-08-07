@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             LocalitySeeder::class,
             ReservationSeeder::class,
             LocationSeeder::class,
+            ShowSeeder::class,
         ]);
 
         //Créer 1 admin
