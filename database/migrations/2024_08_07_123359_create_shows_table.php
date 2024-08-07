@@ -21,7 +21,8 @@ return new class extends Migration
             $table->year('created_in');
             $table->foreignId('location_id')->nullable();
             $table->boolean('bookable')->default(false);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent(); 
+            $table->timestamp('updated_at')->nullable(); 
 
             $table->foreign('location_id')->references('id')->on('locations')
                     ->onDelete('restrict')->onUpdate('cascade');
