@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Show extends Model
 {
@@ -56,4 +57,13 @@ class Show extends Model
     {
         return $this->hasMany(Representation::class);
     }
+
+    /**
+     * Get the performances (artists in a type of collaboration) for the show
+     */
+    public function artistTypes(): BelongsToMany
+    {
+        return $this->belongsToMany(ArtistType::class);
+    }
+
 }
