@@ -5,26 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Show extends Model
+class Representation extends Model
 {
     use HasFactory;
 
-    /**
+        /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'slug',
-        'title',
-        'description',
-        'poster_url',
-        'duration',
-        'created_in',
-        'location_postal_code',
-        'bookable',
+        'show_id',
+        'schedule',
+        'location_id',
     ];
 
    /**
@@ -32,28 +26,28 @@ class Show extends Model
      *
      * @var string
      */
-    protected $table = 'shows';
+    protected $table = 'representations';
 
    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
-    public $timestamps = true;
+    public $timestamps = false;
     
     /**
-     * Get the main location of the show
+     * Get the actual location of the representation
      */
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
     }
-
+    
     /**
-     * Get the representations of this show.
+     * Get the show of the representation
      */
-    public function representations(): HasMany
+    public function show(): BelongsTo
     {
-        return $this->hasMany(Representation::class);
+        return $this->belongsTo(Show::class);
     }
 }
