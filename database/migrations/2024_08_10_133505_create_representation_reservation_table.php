@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('representation_id');
             $table->foreignId('reservation_id');
             $table->decimal('unit_price',10,2);
-            $table->tinyInteger('quantity')->default(1);
+            $table->unsignedTinyInteger('quantity')->default(1);
 
             $table->foreign('representation_id')->references('id')->on('representations')
                     ->onDelete('restrict')->onUpdate('cascade');

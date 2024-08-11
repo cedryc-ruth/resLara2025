@@ -57,4 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(Reservation::class);
     }
 
+    /**
+     * Get the revviews written by the user.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
 }

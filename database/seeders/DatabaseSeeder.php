@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             ArtistTypeShowSeeder::class,
             PriceShowSeeder::class,
             RepresentationReservationSeeder::class,
+            ReviewSeeder::class,
         ]);
 
         //Créer 1 admin

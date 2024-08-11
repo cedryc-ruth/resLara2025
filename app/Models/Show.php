@@ -73,4 +73,12 @@ class Show extends Model
     {
         return $this->belongsToMany(Price::class);
     }
+
+    /**
+     * Get the reviews of this show.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
 }
