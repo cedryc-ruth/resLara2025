@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Models\User;
 
@@ -33,7 +34,7 @@ class UserSeeder extends Seeder
                 'password'=>'12345678',
                 'langue'=>'fr',
                 'created_at'=>'',
-                'role'=>'admin',
+                //'role'=>'admin',
             ],
             [
                 'login'=>'anna',
@@ -43,7 +44,17 @@ class UserSeeder extends Seeder
                 'password'=>'12345678',
                 'langue'=>'en',
                 'created_at'=>'',
-                'role'=>'member',
+                //'role'=>'member',
+            ],
+            [
+                'login'=>'fred',
+                'firstname'=>'Fred',
+                'lastname'=>'Sull',
+                'email'=>'fred@sull.com',
+                'password'=>'12345678',
+                'langue'=>'fr',
+                'created_at'=>'',
+                //'role'=>'admin',
             ],
         ];
         
@@ -51,9 +62,13 @@ class UserSeeder extends Seeder
             $user['email_verified_at'] = Carbon::now()->toDateTimeString();    //date('Y-m-d G:i:s');
             $user['created_at'] = Carbon::now()->toDateTimeString();    //date('Y-m-d G:i:s');
             $user['password'] = Hash::make($user['password']);
+            $user['remember_token'] = Str::random(10);
         }
 
         //Insert data in the table
         DB::table('users')->insert($users);        
+
+        //Add 20 randomly generated users
+        User::factory(20)->create();
     }
 }

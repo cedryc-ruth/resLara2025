@@ -34,7 +34,8 @@ class UserFactory extends Factory
             'created_at' => now(),
             'updated_at' => NULL,
             'langue' => fake()->randomElements(['fr', 'nl', 'en'])[0],
-            'role' => fake()->randomElements(['member', 'affiliate', 'press'])[0],
+            //Champ role supprimé après refactoring de la DB users x roles (ManyToMany)
+            //'role' => fake()->randomElements(['member', 'affiliate', 'press'])[0],
         ];
     }
 

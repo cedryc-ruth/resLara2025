@@ -15,7 +15,9 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Role::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         
         //Define data
        $data = [
