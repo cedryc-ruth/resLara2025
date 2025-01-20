@@ -8,4 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('artists', ArtistApiController::class);
+//Route::middleware('auth:basic')->group(function () {
+    Route::apiResource('artists', ArtistApiController::class)->middleware('auth.basic');
+//});
