@@ -9,5 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 //Route::middleware('auth:basic')->group(function () {
-    Route::apiResource('artists', ArtistApiController::class)->middleware('auth.basic');
+    Route::apiResource('artists', ArtistApiController::class)->middleware(['auth.basic']);
 //});

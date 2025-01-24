@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artist;
+use Illuminate\Support\Facades\Gate;
 
 class ArtistApiController extends Controller
 {
@@ -16,18 +17,14 @@ class ArtistApiController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Ajouter un nouvel artiste.
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('update-artist')) {
+            return response()->json(["error"=>"Action non autorisée."],403);
+        }
+        
         $validated = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -53,18 +50,14 @@ class ArtistApiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Mettre à jour un artiste.
      */
     public function update(Request $request, string $id)
     {
+        if (!Gate::allows('update-artist')) {
+            return response()->json(["error"=>"Action non autorisée."],403);
+        }
+
         $artist = Artist::find($id);
 
         if (!$artist) {
@@ -86,6 +79,10 @@ class ArtistApiController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!Gate::allows('delete-artist')) {
+            return response()->json(["error"=>"Action non autorisée."],403);
+        }
+
         $artist = Artist::find($id);
 
         if (!$artist) {
