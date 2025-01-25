@@ -36,6 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //Route::apiResource('artists', ArtistApiController::class)->middleware('auth.basic');
 
-//Route::middleware('auth:basic')->group(function () {
-    Route::apiResource('artists', ArtistApiController::class)->middleware('auth.basic');
-//});
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('artists', ArtistApiController::class);
+});
+
